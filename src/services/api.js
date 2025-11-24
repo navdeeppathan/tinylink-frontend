@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_BASE = import.meta.env.REACT_APP_API_URL || "http://localhost:5000";
+const API_BASE =
+  import.meta.env.REACT_APP_API_URL ||
+  "https://tinylink-backend-1.onrender.com";
 
 export const api = {
   createLink: (data) => axios.post(`${API_BASE}/api/links`, data),
