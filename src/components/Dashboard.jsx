@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { api, getShortUrl } from "../services/api";
 import { RotatingLines, ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const [links, setLinks] = useState([]);
@@ -12,6 +13,8 @@ export default function Dashboard() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetchLinks();
@@ -248,12 +251,12 @@ export default function Dashboard() {
                         >
                           Copy
                         </button>
-                        <a
-                          href={`/code/${link.code}`}
+                        <Link
+                          to={`/code/${link.code}`}
                           className="text-white  flex cursor-pointer items-center justify-center hover:text-green-800  bg-green-400 px-2 py-1 rounded text-sm font-normal"
                         >
                           Stats
-                        </a>
+                        </Link>
                         <button
                           onClick={() => handleDelete(link.code)}
                           className="text-white flex cursor-pointer items-center justify-center hover:text-red-800 bg-red-400 px-2 py-1 rounded  text-sm font-normal"
