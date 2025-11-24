@@ -3,6 +3,7 @@ import { api, getShortUrl } from "../services/api";
 import { RotatingLines, ThreeDots } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import StatsModal from "./StatsPage";
 
 export default function Dashboard() {
   const [links, setLinks] = useState([]);
@@ -87,6 +88,9 @@ export default function Dashboard() {
       link.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
       link.target_url.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedCode, setSelectedCode] = useState("");
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -251,12 +255,15 @@ export default function Dashboard() {
                         >
                           Copy
                         </button>
-                        <Link
-                          to={`/code/${link.code}`}
+                        <button
+                          onClick={() => {
+                            setSelectedCode(link.code);
+                            setModalOpen(true);
+                          }}
                           className="text-white  flex cursor-pointer items-center justify-center hover:text-green-800  bg-green-400 px-2 py-1 rounded text-sm font-normal"
                         >
                           Stats
-                        </Link>
+                        </button>
                         <button
                           onClick={() => handleDelete(link.code)}
                           className="text-white flex cursor-pointer items-center justify-center hover:text-red-800 bg-red-400 px-2 py-1 rounded  text-sm font-normal"
@@ -272,6 +279,11 @@ export default function Dashboard() {
           </div>
         )}
       </div>
+      <StatsModal
+        code={selectedCode}
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+      />
     </div>
   );
 }

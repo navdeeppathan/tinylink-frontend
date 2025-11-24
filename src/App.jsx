@@ -11,7 +11,7 @@ function App() {
       <div className="min-h-screen bg-gray-100">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/code/:code" element={<StatsPage />} />
+          {/* <Route path="/code/:code" element={<StatsPage />} /> */}
         </Routes>
       </div>
     </BrowserRouter>
